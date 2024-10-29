@@ -170,17 +170,17 @@ do
             echo "--------------------------------------------------------------------------"
             echo
 
-            sleep 5
             if [ -f ${buildDIR}/options ] && [ ${OPTIONS} == true ]; then
                 cp ${buildDIR}/options ${buildDIR}/${BRANCH}/distributions/LibreELEC/options
             fi
             if [ -d ${buildDIR}/packages/ ]; then
                 echo "Patching Apps"
-                cp -R ${buildDIR}/packages/ ${buildDIR}/${BRANCH}/
-                sleep 2
+                rsync -avP ${buildDIR}/packages ${buildDIR}/${BRANCH}/packages
             fi
             cd ${buildDIR}/${BRANCH}/
 	        sed -i 's/^HOME_URL.*/HOME_URL="https\:\/\/media\.theodin\.network"/' scripts/image
+            sleep 15
+
             rm -rf ${buildDIR}/${BRANCH}/target/*
             PROJECT=RPi ARCH=${architecture} DEVICE=${DEVICE} make image
 
