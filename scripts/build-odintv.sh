@@ -170,8 +170,8 @@ do
             echo "--------------------------------------------------------------------------"
             echo
 
-            if [ -f ${buildDIR}/options ] && [ ${OPTIONS} == true ]; then
-                cp ${buildDIR}/options ${buildDIR}/${BRANCH}/distributions/LibreELEC/options
+            if [ -f ${buildDIR}/${BRANCH}/options ] && [ ${OPTIONS} == true ]; then
+                cp ${buildDIR}/${BRANCH}/options ${buildDIR}/${BRANCH}/distributions/LibreELEC/options
             fi
             if [ -d ${buildDIR}/packages/ ]; then
                 echo "Patching Apps"
