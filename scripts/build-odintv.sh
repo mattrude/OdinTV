@@ -194,12 +194,8 @@ do
                 sudo mkdir -p ${HTTPOUTDIR}
 		        gpg --detach-sign `ls ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz`
                 sudo rsync -a ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz* ${HTTPOUTDIR}/
-                #sudo rsync -a ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz.sig ${HTTPOUTDIR}/
-                #sudo rsync -a ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz.sha256 ${HTTPOUTDIR}/
-                cd ${HTTPOUTDIR}
-		        ls -1tr |head -n -13 |sudo xargs -d '\n' rm -f --
-		        #sha256sum `ls -t |egrep -v "^current$" |egrep -v "^HEADER.txt$" |head -1` |sudo tee current > /dev/null
-		        sha256sum `ls -t *-${DEVICE}.aarch64-*img.gz |head -1` |sudo tee current > /dev/null
+                cd ${HTTPOUTDIR}; ls -1tr |head -n -13 |sudo xargs -d '\n' rm -f --
+		        sha256sum `ls -t *-${DEVICE}.aarch64-*img.gz |head -1` |sudo tee Current.txt > /dev/null
             fi
         done
     else
