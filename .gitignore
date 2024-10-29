@@ -1,6 +1,6 @@
-build.log
-libreelec-10.0/
-libreelec-11.0/
-libreelec-12.0/
-master/
-package.mk
+/build.log
+/libreelec-10.0/
+/libreelec-11.0/
+/libreelec-12.0/
+/master/
+/package.mk
