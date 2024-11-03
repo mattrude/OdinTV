@@ -170,8 +170,11 @@ do
             echo "--------------------------------------------------------------------------"
             echo
 
-            if [ -f ${buildDIR}/${BRANCH}/options ] && [ ${OPTIONS} == true ]; then
-                cp ${buildDIR}/${BRANCH}/options ${buildDIR}/${BRANCH}/distributions/LibreELEC/options
+            if [ -f ${buildDIR}/files/${BRANCH}/options ] && [ ${OPTIONS} == true ]; then
+                echo "Using Options File ${buildDIR}/files/${BRANCH}/options"
+                cp ${buildDIR}/files/${BRANCH}/options ${buildDIR}/${BRANCH}/distributions/LibreELEC/options
+            else
+                echo "Not using Options File"
             fi
             if [ -d ${buildDIR}/packages/ ]; then
                 echo "Patching Apps"
@@ -179,6 +182,11 @@ do
             fi
             cd ${buildDIR}/${BRANCH}/
 	        sed -i 's/^HOME_URL.*/HOME_URL="https\:\/\/media\.theodin\.network"/' scripts/image
+
+            echo "Patching Kodi"
+            cd ${buildDIR}/${BRANCH}/
+            patch -p1 --forward < ../files/vendor_logo.patch || true
+
             sleep 15
 
             rm -rf ${buildDIR}/${BRANCH}/target/*
