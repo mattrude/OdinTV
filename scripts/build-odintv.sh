@@ -175,17 +175,17 @@ do
                 cp ${buildDIR}/files/${BRANCH}/options ${buildDIR}/${BRANCH}/distributions/LibreELEC/options
             else
                 echo "NOT using Options File!!!"
-                sleep 5
+                exit 1
             fi
             if [ -d ${buildDIR}/packages/ ]; then
                 echo "Patching Apps"
-                rsync -avP ${buildDIR}/packages ${buildDIR}/${BRANCH}/packages
+                rsync -a ${buildDIR}/packages ${buildDIR}/${BRANCH}/packages
             else
                 echo "NOT patching Apps!!!!!"
-                sleep 5
+                exit 1
             fi
             cd ${buildDIR}/${BRANCH}/
-	        sed -i 's/^HOME_URL.*/HOME_URL="https\:\/\/media\.theodin\.network"/' scripts/image
+	        sed -i 's/^HOME_URL.*/HOME_URL=\"https\:\/\/media\.theodin\.network\"/' scripts/image
 
             echo "Patching Kodi"
             cd ${buildDIR}/${BRANCH}/
@@ -204,8 +204,8 @@ do
                 VERSION=`echo ${RBRANCH} |sed 's/libreelec-//g'`
                 HTTPOUTDIR=${httpDIR}/${IMGLOC}/${VERSION}/${DEVICE}
                 sudo mkdir -p ${HTTPOUTDIR}
-                echo "Creating GPG Signure file"
-		        gpg --detach-sign `ls ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz`
+                #echo "Creating GPG Signure file"
+		        #gpg --detach-sign `ls ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz`
                 sudo rsync -a ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz* ${HTTPOUTDIR}/
                 cd ${HTTPOUTDIR}; ls -1tr |head -n -13 |sudo xargs -d '\n' rm -f --
 		        sha256sum `ls -t *-${DEVICE}.aarch64-*img.gz |head -1` |sudo tee Current.txt > /dev/null
