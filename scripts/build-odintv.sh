@@ -3,7 +3,7 @@
 buildDIR='/var/src/OdinTV'
 httpDIR='/var/www/html'
 architecture="aarch64"
-devices="RPi5 RPi4"
+devices="RPi4 RPi5"
 branch="libreelec-12.0 libreelec-11.0 master"
 GITURL="https://github.com/LibreELEC/LibreELEC.tv.git"
 masterName='libreelec-13.0'
@@ -159,6 +159,7 @@ do
 
         for DEVICE in ${devices}
         do
+            git -C ${buildDIR}/${BRANCH}/ reset --hard
             echo
             echo "--------------------------------------------------------------------------"
             echo
@@ -179,7 +180,8 @@ do
             fi
             if [ -d ${buildDIR}/packages/ ]; then
                 echo "Patching Apps"
-                rsync -a ${buildDIR}/packages ${buildDIR}/${BRANCH}/packages
+                echo "rsync -av ${buildDIR}/packages/ ${buildDIR}/${BRANCH}/packages/"
+                rsync -av ${buildDIR}/packages/ ${buildDIR}/${BRANCH}/packages/
             else
                 echo "NOT patching Apps!!!!!"
                 exit 1

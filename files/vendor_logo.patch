@@ -1,11 +1,15 @@
 diff --git a/packages/mediacenter/kodi/package.mk b/packages/mediacenter/kodi/package.mk
-index d264c8251e..258da00ab1 100644
+index d264c8251e..d954c3ab19 100644
 --- a/packages/mediacenter/kodi/package.mk
 +++ b/packages/mediacenter/kodi/package.mk
-@@ -433,6 +433,8 @@ post_makeinstall_target() {
+@@ -433,6 +433,12 @@ post_makeinstall_target() {
        -e "s:CMAKE_MODULE_PATH /usr/lib/kodi /usr/share/kodi/cmake:CMAKE_MODULE_PATH ${SYSROOT_PREFIX}/usr/share/kodi/cmake:g" \
        -i ${SYSROOT_PREFIX}/usr/lib/kodi/cmake/KodiConfig.cmake
  
++  mkdir -p ${INSTALL}/usr/share/kodi/scripts
++  cp -f ${PKG_DIR}/scripts/refresh-home.py ${INSTALL}/usr/share/kodi/scripts/refresh-home.py
++  cp -f ${PKG_DIR}/media/refresh-home.png ${INSTALL}/usr/share/kodi/media/refresh-home.png
++
 +  cp -f ${PKG_DIR}/media/vendor_logo.png ${INSTALL}/usr/share/kodi/media/vendor_logo.png
 +
    if [ "${KODI_EXTRA_FONTS}" = yes ]; then
