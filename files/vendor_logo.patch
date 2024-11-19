@@ -1,8 +1,24 @@
 diff --git a/packages/mediacenter/kodi/package.mk b/packages/mediacenter/kodi/package.mk
-index d264c8251e..d954c3ab19 100644
+index d264c8251e..9e0ee99c17 100644
 --- a/packages/mediacenter/kodi/package.mk
 +++ b/packages/mediacenter/kodi/package.mk
-@@ -433,6 +433,12 @@ post_makeinstall_target() {
+@@ -376,6 +376,7 @@ post_makeinstall_target() {
+     ln -sf /usr/bin/pastekodi ${INSTALL}/usr/bin/pastecrash
+ 
+   mkdir -p ${INSTALL}/usr/share/kodi/addons
++    cp -R ${PKG_DIR}/config/repository.theodin ${INSTALL}/usr/share/kodi/addons
+     cp -R ${PKG_DIR}/config/repository.libreelec.tv ${INSTALL}/usr/share/kodi/addons
+     sed -e "s|@ADDON_URL@|${ADDON_URL}|g" -i ${INSTALL}/usr/share/kodi/addons/repository.libreelec.tv/addon.xml
+     sed -e "s|@ADDON_VERSION@|${ADDON_VERSION}|g" -i ${INSTALL}/usr/share/kodi/addons/repository.libreelec.tv/addon.xml
+@@ -420,6 +421,7 @@ post_makeinstall_target() {
+   ADDON_MANIFEST=${INSTALL}/usr/share/kodi/system/addon-manifest.xml
+   xmlstarlet ed -L -d "/addons/addon[text()='service.xbmc.versioncheck']" ${ADDON_MANIFEST}
+   xmlstarlet ed -L --subnode "/addons" -t elem -n "addon" -v "repository.libreelec.tv" ${ADDON_MANIFEST}
++  xmlstarlet ed -L --subnode "/addons" -t elem -n "addon" -v "repository.theodin" ${ADDON_MANIFEST}
+   if [ -n "${DISTRO_PKG_SETTINGS}" ]; then
+     xmlstarlet ed -L --subnode "/addons" -t elem -n "addon" -v "${DISTRO_PKG_SETTINGS_ID}" ${ADDON_MANIFEST}
+   fi
+@@ -433,6 +435,12 @@ post_makeinstall_target() {
        -e "s:CMAKE_MODULE_PATH /usr/lib/kodi /usr/share/kodi/cmake:CMAKE_MODULE_PATH ${SYSROOT_PREFIX}/usr/share/kodi/cmake:g" \
        -i ${SYSROOT_PREFIX}/usr/lib/kodi/cmake/KodiConfig.cmake
  

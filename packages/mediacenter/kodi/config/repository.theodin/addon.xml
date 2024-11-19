@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.theodin" name="The Odin Network Repository" version="1.0.2" provider-name="The Odin Network">
+    <extension point="xbmc.addon.repository" name="The Odin Network Repository">
+        <dir>
+            <info compressed="false">https://media.theodin.network/repo/addons.xml</info>
+            <checksum>https://media.theodin.network/repo/addons.xml.md5</checksum>
+            <datadir zip="true">https://media.theodin.network/repo/</datadir>
+            <hashes>false</hashes>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>The Odin Network Repository</summary>
+        <description>A repository of add-ons for the OdinTV system.</description>
+        <platform>all</platform>
+    </extension>
+</addon>
