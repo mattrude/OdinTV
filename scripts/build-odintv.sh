@@ -4,7 +4,7 @@ buildDIR='/var/src/OdinTV'
 httpDIR='/var/www/html'
 architecture="aarch64"
 devices="RPi4 RPi5"
-branch="libreelec-12.0 libreelec-11.0 master"
+branch="libreelec-12.0"
 GITURL="https://github.com/LibreELEC/LibreELEC.tv.git"
 masterName='libreelec-13.0'
 FORCEBUILD=false
@@ -209,7 +209,7 @@ do
                 #echo "Creating GPG Signure file"
 		        #gpg --detach-sign `ls ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz`
                 sudo rsync -a ${buildDIR}/${BRANCH}/target/*-${DEVICE}.aarch64-*img.gz* ${HTTPOUTDIR}/
-                cd ${HTTPOUTDIR}; ls -1tr |head -n -13 |sudo xargs -d '\n' rm -f --
+                cd ${HTTPOUTDIR}; ls -1tr |head -n -1: |sudo xargs -d '\n' rm -f --
 		        sha256sum `ls -t *-${DEVICE}.aarch64-*img.gz |head -1` |sudo tee Current.txt > /dev/null
             fi
         done

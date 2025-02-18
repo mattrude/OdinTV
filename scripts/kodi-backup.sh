@@ -9,7 +9,6 @@ else
     DATE=`date +%w.%Y%m%d`
     rm -rf ${DIR}/KodiDB.`date +%w`.*.sql.gz ${DIR}/watched.movies.`date +%w`.*.json.gz ${DIR}/watched.tvshows.`date +%w`.*.json.gz
 fi
-exit 0
 
 sudo mysqldump --all-databases > /var/lib/kodi-backup/KodiDB.${DATE}.sql && gzip /var/lib/kodi-backup/KodiDB.${DATE}.sql && \
 /usr/local/bin/texturecache.py watched tvshows backup /var/lib/kodi-backup/watched.tvshows.${DATE}.json @section=jacktv && \
